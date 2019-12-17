@@ -6,6 +6,7 @@ class Api::V1::Push::SubscriptionsController < Api::BaseController
   before_action :set_web_push_subscription
 
   def create
+    raise ActionController::RoutingError.new('Not Found')
     @web_subscription&.destroy!
 
     @web_subscription = ::Web::PushSubscription.create!(
@@ -21,12 +22,14 @@ class Api::V1::Push::SubscriptionsController < Api::BaseController
   end
 
   def show
+    raise ActionController::RoutingError.new('Not Found')
     raise ActiveRecord::RecordNotFound if @web_subscription.nil?
 
     render json: @web_subscription, serializer: REST::WebPushSubscriptionSerializer
   end
 
   def update
+    raise ActionController::RoutingError.new('Not Found')
     raise ActiveRecord::RecordNotFound if @web_subscription.nil?
 
     @web_subscription.update!(data: data_params)
@@ -35,6 +38,7 @@ class Api::V1::Push::SubscriptionsController < Api::BaseController
   end
 
   def destroy
+    raise ActionController::RoutingError.new('Not Found')
     @web_subscription&.destroy!
     render_empty
   end
