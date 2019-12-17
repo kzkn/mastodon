@@ -6,6 +6,7 @@ class Api::Web::PushSubscriptionsController < Api::Web::BaseController
   before_action :require_user!
 
   def create
+    raise ActionController::RoutingError.new('Not Found')
     active_session = current_session
 
     unless active_session.web_push_subscription.nil?
@@ -44,6 +45,7 @@ class Api::Web::PushSubscriptionsController < Api::Web::BaseController
   end
 
   def update
+    raise ActionController::RoutingError.new('Not Found')
     params.require([:id])
 
     web_subscription = ::Web::PushSubscription.find(params[:id])
